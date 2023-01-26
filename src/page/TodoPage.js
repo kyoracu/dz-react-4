@@ -6,6 +6,7 @@ import Button from '../components/UI/Button';
 import Input from '../components/UI/Input';
 
 const TodoPage = () => {
+  const collator =  new Intl.Collator('ru')
   const [ todoList, setTodoList ] = useState(null) 
   const [ isShow, setIsShow ] = useState(false)
 
@@ -85,13 +86,14 @@ const TodoPage = () => {
 
     switch (sortBy) {
       case 'abs': {
-        return arr?.sort((a, b) => a - b)
+        return arr?.sort((x, z) => x.id - z.id)
       }
       case 'desc': {
-        return []
+        return arr?.sort((x, z) => z.id - x.id)
       }
       case 'letter': {
-        return []
+  
+        return arr.title.split('').sort((a,b)=>collator.compare(a,b)).reverse().join('')
       }
       default: {
         return arr
